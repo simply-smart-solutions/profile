@@ -106,7 +106,7 @@
                 'X-CSRF-TOKEN': "{{csrf_token()}}"
             }
         });
-        var imgupload = "{{route('summernote.upload')}}";
+        var imgupload = "{{route('lfm.summernote.upload')}}";
         var baseurl = "{{url('/')}}";
         // var route_prefix = "{{ url('laravel-filemanager') }}";
 
