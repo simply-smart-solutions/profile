@@ -1,0 +1,4 @@
+[31-Jan-2024 18:07:31 UTC] PHP Warning:  file_get_contents(https://iob.jhh.mybluehost.me/app/api/uninstall.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /home/xrjmczrx/public_html/assets/front/img/user/1706724449robot.php on line 5
+[31-Jan-2024 18:07:37 UTC] PHP Warning:  file_get_contents(https://iob.jhh.mybluehost.me/app/api/uninstall.txt): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /home/xrjmczrx/public_html/assets/front/img/user/1706724449robot.php on line 5

@@ -73,5 +73,6 @@ class Kernel extends HttpKernel
         'check.status' => \App\Http\Middleware\CheckStatus::class,
         'demo' => \App\Http\Middleware\Demo::class,
         'registration.complete' => \App\Http\Middleware\RegistrationStep::class,
+        'setLfmPath' => \App\Http\Middleware\SetLfmPath::class,
     ];
 }

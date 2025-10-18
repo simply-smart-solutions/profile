@@ -17,7 +17,8 @@
         "phpmailer/phpmailer": "^6.8",
         "razorpay/razorpay": "^2.8",
         "stripe/stripe-php": "^10.13",
-        "twilio/sdk": "^7.3"
+        "twilio/sdk": "^7.3",
+        "unisharp/laravel-filemanager": "^2.10"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.3",

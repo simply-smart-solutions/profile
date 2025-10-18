@@ -7,6 +7,7 @@ Route::get('/clear', function(){
     \Illuminate\Support\Facades\Artisan::call('optimize:clear');
 });
 
+
 // User Support Ticket
 Route::controller('TicketController')->prefix('ticket')->group(function () {
     Route::get('/', 'supportTicket')->name('ticket');

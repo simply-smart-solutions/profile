@@ -25,6 +25,13 @@ Route::namespace('Auth')->group(function () {
 });
 
 Route::middleware('admin')->group(function () {
+    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'setLfmPath']], function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+        Route::post('summernote/upload', 'Admin\SummernoteController@uploadFileManager')->name('lfm.summernote.upload');
+    });
+    Route::post('/summernote/upload', 'Admin\SummernoteController@upload')->name('summernote.upload');
+    
+
     Route::controller('ImageUploadController')->group(function(){
         Route::post('/upload-image', 'upload')->name('upload_image');
         Route::get('/upload-image', 'upload')->name('upload_image');
