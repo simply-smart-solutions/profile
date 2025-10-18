@@ -25,6 +25,10 @@ Route::namespace('Auth')->group(function () {
 });
 
 Route::middleware('admin')->group(function () {
+    Route::controller('ImageUploadController')->group(function(){
+        Route::post('/upload-image', 'upload')->name('upload_image');
+        Route::get('/upload-image', 'upload')->name('upload_image');
+    });
     Route::controller('AdminController')->group(function(){
         Route::get('dashboard', 'dashboard')->name('dashboard');
         Route::get('profile', 'profile')->name('profile');

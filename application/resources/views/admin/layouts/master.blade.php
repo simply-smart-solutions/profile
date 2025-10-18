@@ -37,16 +37,25 @@
 
     <script src="{{asset('assets/admin/js/select2.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/admin.js')}}"></script>
-    <script src="{{ asset('assets/common/js/ckeditor.js') }}"></script>
+    {{-- <script src="{{ asset('assets/common/js/ckeditor.js') }}"></script> --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
     {{-- LOAD EDITOR --}}
     <script>
-        "use strict";
+        // "use strict";
         if ($(".trumEdit")[0]) {
             ClassicEditor
-                .create(document.querySelector('.trumEdit'))
-                .then(editor => {
-                    window.editor = editor;
-                });
+            .create(document.querySelector('.trumEdit'), {
+                simpleUpload: {
+                    uploadUrl: '{{ url("/upload/image") }}', // এখানে তোমার সার্ভারের upload route দাও
+                }
+            })
+            .then(editor => {
+                console.log('Editor ready', editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
         }
     </script>
 
