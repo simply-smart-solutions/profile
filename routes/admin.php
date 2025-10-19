@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\TeamMemberController;
 
 Route::namespace('Auth')->group(function () {
     Route::controller('LoginController')->group(function () {
@@ -33,10 +34,13 @@ Route::namespace('Auth')->group(function () {
 
 Route::middleware('admin')->group(function () {
 
+    Route::resource('team', TeamMemberController::class);
+
     Route::controller('ImageUploadController')->group(function(){
         Route::post('/upload-image', 'upload')->name('upload_image');
         Route::get('/upload-image', 'upload')->name('upload_image');
     });
+    
     Route::controller('AdminController')->group(function(){
         Route::get('dashboard', 'dashboard')->name('dashboard');
         Route::get('profile', 'profile')->name('profile');

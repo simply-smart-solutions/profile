@@ -67,8 +67,6 @@ class FrontendController extends Controller
     }
 
 
-
-
     public function frontendContent(Request $request, $key)
     {
         $purifier = new \HTMLPurifier();

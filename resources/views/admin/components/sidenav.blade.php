@@ -179,6 +179,13 @@
                     </a>
                 </li>
 
+                <li class="sidebar-menu-item {{ menuActive('admin.team.*') }}">
+                    <a href="{{ route('admin.team.index') }}" class="nav-link ">
+                        <i class="menu-icon la la-pager"></i>
+                        <span class="menu-title">@lang('Teams')</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-menu-item sidebar-dropdown">
                     <a href="javascript:void(0)" class="{{ menuActive('admin.frontend.sections*', 3) }}">
                         <i class="menu-icon la la-grip-horizontal"></i>
