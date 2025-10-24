@@ -2,10 +2,10 @@
 @section('content')
 
     <!-- ==================== Product Details Here ==================== -->
-    <section class="product-details-area py-80">
+    <section id="service_details_page" class="product-details-area py-80">
         <div class="container">
-            <div class="row gy-4">
-                <div class="col-lg-8">
+            <div class="row gy-4 justify-content-center">
+                <div class="col-lg-10">
                     <div class="product-details-left">
                         <div class="product-details-left__content">
                             <div class="tab-content" id="myTabContent">
@@ -40,20 +40,20 @@
                             <div class="product-info">
                                 <div class="product-title">
                                     <h3>{{ __($service->name) }}</h3>
-                                    <ul class="social-list">
-                                        <li class="social-list__item"><a href="<?php echo getProductShareLinks($service->id)['facebook']; ?>"
+                                    {{-- <ul class="social-list">
+                                        <li class="social-list__item"><a href="<?php echo getServiceShareLinks($service->id)['facebook']; ?>"
                                                 class="social-list__link" target="_blank"><i
                                                     class="fab fa-facebook-f"></i></a> </li>
-                                        <li class="social-list__item"><a href="<?php echo getProductShareLinks($service->id)['twitter']; ?>"
+                                        <li class="social-list__item"><a href="<?php echo getServiceShareLinks($service->id)['twitter']; ?>"
                                                 class="social-list__link" target="_blank"> <i
                                                     class="fab fa-twitter"></i></a></li>
-                                        <li class="social-list__item"><a href="<?php echo getProductShareLinks($service->id)['linkedin']; ?>"
+                                        <li class="social-list__item"><a href="<?php echo getServiceShareLinks($service->id)['linkedin']; ?>"
                                                 class="social-list__link" target="_blank"> <i
                                                     class="fab fa-linkedin-in"></i></a></li>
-                                        <li class="social-list__item"><a href="<?php echo getProductShareLinks($service->id)['instagram']; ?>"
+                                        <li class="social-list__item"><a href="<?php echo getServiceShareLinks($service->id)['instagram']; ?>"
                                                 class="social-list__link" target="_blank"> <i
                                                     class="fab fa-instagram"></i></a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </div>
                                 <div class="tag-rating-sales-wrap">
                                     <p class="cate-title">{{ __(@$service->category->name) }}</p>
@@ -175,7 +175,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="section-heading  text-left">
-                        <h2 class="section-heading__title pb-4">@lang('Related Products')</h2>
+                        <h2 class="section-heading__title pb-4">@lang('Other Services')</h2>
                         <div class="border-bottom pb-3"></div>
                     </div>
                 </div>
@@ -189,34 +189,33 @@
                                 <a href="{{ route('product.details', ['slug' => slug($service->name), 'id' => $service->id])}}">
                                     <img src="{{ getImage(getFilePath('serviceImage').'/'.@$service->image)}}" alt="product image">
                                 </a>
-                                @if(isset($service->discount))
                                 <div class="product-badge bg--info">
-                                    @if($service->is_free ==1)
-                                    <p>@lang('Free')</p>
-                                    @else
-                                    <p>{{$service->discount}}%</p>
-                                    @endif
+                                    @lang('Smart')
                                 </div>
-                                @else
-                                <div class="product-badge bg--base">
-                                    <p>@lang('New')</p>
-                                </div>
-                                @endif
                             </div>
                             <div class="content">
                                 <div class="content-text">
-                                   <h5><a href="{{ route('service.details', ['slug' => slug($service->name), 'id' => $service->id])}}" target="_blank">
-                                        @if(strlen(__($service->name)) >30)
-                                        {{substr( __($service->name), 0,30).'...' }}
+                                   <h5>
+                                        <a href="{{ route('service.details', ['slug' => slug($service->name), 'id' => $service->id])}}" target="_blank">
+                                            @if(strlen(__($service->name)) >30)
+                                            {{substr( __($service->name), 0,30).'...' }}
+                                            @else
+                                            {{__($service->name)}}
+                                            @endif
+                                        </a>
+                                    </h5>
+                                    {{-- <p>
+                                        @if(strlen(__($service->description)) >50)
+                                        {{substr( __($service->description), 0,50).'...' }}
                                         @else
-                                        {{__($service->name)}}
+                                        {{__($service->description)}}
                                         @endif
-                                    </a></h5>
+                                    </p> --}}
                                 </div>
                                 <div class="card-meta">
                                     <div class="btm">
                                         <div class="cart">
-                                            <a href="{{ route('service.details', ['slug' => slug($service->name), 'id' => $service->id])}}" class="btn btn--base btn--sm outline"><i class="fas fa-cart-plus"></i> @lang('Free')</a>
+                                            <a href="{{ route('service.details', ['slug' => slug($service->name), 'id' => $service->id])}}" class="btn btn--base btn--sm outline"><i class="fas fa-view"></i> @lang('Open')</a>
                                         </div>
                                     </div>
                                 </div>
@@ -237,6 +236,9 @@
 
 @push('style')
     <style>
+        #service_details_page img{
+            margin: 15px !important;
+        }
         .wyg h1,
         .wyg h2,
         .wyg h3,

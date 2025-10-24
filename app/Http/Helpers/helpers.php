@@ -466,6 +466,22 @@ function getProductShareLinks($productId)
       return $shareLinks;
   }
 
+  function getServiceShareLinks($serviceId)
+  {
+      $service = Service::findOrFail($serviceId);
+
+      $serviceUrl = $service->url;
+      $shareLinks = [
+          'facebook' => 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode($serviceUrl),
+          'twitter' => 'https://twitter.com/intent/tweet?url=' . urlencode($serviceUrl),
+          'linkedin' => 'https://www.linkedin.com/shareArticle?url=' . urlencode($serviceUrl),
+          'instagram' => 'https://www.instagram.com/share?url=' . urlencode($serviceUrl)
+      ];
+
+      return $shareLinks;
+  }
+  
+
   function calculateAverageRating($averageRating)
 {
     if (empty($averageRating)) {

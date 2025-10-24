@@ -18,12 +18,12 @@ class SummernoteController extends Controller
     }
     public function uploadFileManager(Request $request) {
 
-        \Log::info($request->all());
+        // \Log::info($request->all());
 
         $items = $request->items;
         if(is_array($items)){
             // return $items;
-            $allowedExts = array('jpg', 'png', 'jpeg', 'svg');
+            $allowedExts = array('jpg', 'png', 'jpeg', 'svg', 'jfif', 'avif');
             foreach ($items as $key => $item) {
                 $ext = pathinfo($item, PATHINFO_EXTENSION);
                 if (!in_array($ext, $allowedExts)) {
@@ -35,8 +35,8 @@ class SummernoteController extends Controller
             foreach ($items as $key => $item) {
                 $ext = pathinfo($item, PATHINFO_EXTENSION);
                 $filename = uniqid() . '.' . $ext;
-                @copy($item, '' . $filename);
-                $urls[] = url('' . $filename);
+                copy($item, public_path('images/' . $filename));
+                $urls[] = url('public/images/' . $filename);
             }
 
             return response()->json(['status' => 'success', 'urls' => $urls]);

@@ -93,14 +93,49 @@
     <!-- Popper and Bootstrap (bundle includes tooltip) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
-
-    <!-- Summernote (BS4 version) -->
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs4.min.js"></script>
     
     <!-- Summernote JS -->
     <script src="{{asset('assets/admin/js/plugin/summernote/summernote-bs4.js')}}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.7.0/mammoth.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docx-preview@0.3.2/dist/docx-preview.umd.min.js"></script>
+    
+
+
     <script>
+
+        var docxImport = function(context) {
+            var ui = $.summernote.ui;
+            // create button
+            var button = ui.button({
+                contents: '<i class="note-icon-upload"></i> DOCX',
+                tooltip: 'Import DOCX',
+                click: function() {
+                    var input = $('<input type="file" accept=".docx" style="display:none" />');
+                    input.on('change', function(event) {
+                    var file = event.target.files[0];
+                    if (!file) return;
+
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        mammoth.convertToHtml({ arrayBuffer: e.target.result })
+                        .then(function(result) {
+                            context.invoke('editor.pasteHTML', result.value);
+                        })
+                        .catch(function(err) {
+                            alert('Error importing DOCX: ' + err.message);
+                        });
+                    };
+                    reader.readAsArrayBuffer(file);
+                    });
+                    input.trigger('click');
+                }
+            });
+            return button.render();
+            
+        }
+
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': "{{csrf_token()}}"
@@ -153,11 +188,12 @@
                     ['color', ['color']],
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['table', ['table']],
-                    ['insert', ['link', 'image', 'picture', 'video']],
+                    ['insert', ['link', 'image', 'picture', 'video', 'docxImport']],
                     ['view', ['fullscreen', 'codeview', 'help']],
                 ],
                 buttons: {
                     image: ImageButton,
+                    docxImport: docxImport
                 },
                 popover: {
                     image: [
